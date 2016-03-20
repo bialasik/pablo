@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const app = require('./../index');
 const fs = require('fs');
 const package = require('./../package.json');
 const path = require('path');
@@ -45,7 +46,7 @@ program
   .action(() => {
     fs.writeFile(`${__dirname}/../pablo.json`, JSON.stringify(generate(fs.readdirSync(`${config.context}`))), (err) => {
       if (err) throw err;
-      console.log('Generated JSON');
+      app.start();
     });
   })
 
