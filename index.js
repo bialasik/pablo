@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const express = require('express');
 
-const app = module.exports = express();
+const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -17,4 +17,8 @@ app.disable('x-powered-by');
 app.get('/health-check', (req, res) => res.sendStatus(200));
 app.get('*', (req, res) => res.sendFile(`${__dirname}/index.html`));
 
-app.listen(process.env.PORT || 3000);
+module.exports = {
+  start: () => {
+    app.listen(process.env.PORT || 3000);
+  }
+};
