@@ -7,7 +7,11 @@ const path = require('path');
 const program = require('commander');
 const uuid = require('node-uuid');
 
-const config = JSON.parse(fs.readFileSync(`${path.dirname()}/pablo.json`, 'utf-8'));
+const INPUT_FILENAME = 'pablo.json';
+const OUTPUT_FILENAME = 'pablo.json';
+
+const config = JSON.parse(fs.readFileSync(`${path.dirname()}/${INPUT_FILENAME}`, 'utf-8'));
+const root = config.context;
 
 const isDirectory = (file) => fs.lstatSync(file).isDirectory();
 
@@ -36,15 +40,11 @@ const build = (context, files) => {
   };
 };
 
-const generate = (files) => {
-  return build(`${config.context}`, files);
-};
-
 program
   .version(package.version)
   .command('start')
   .action(() => {
-    fs.writeFile(`${__dirname}/../pablo.json`, JSON.stringify(generate(fs.readdirSync(`${config.context}`))), (err) => {
+    fs.writeFile(`${__dirname}/../${OUTPUT_FILENAME}`, JSON.stringify(build(root, fs.readdirSync(root))), (err) => {
       if (err) throw err;
       app.start();
     });
