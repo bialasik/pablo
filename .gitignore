@@ -1,0 +1,6 @@
+.DS_Store
+jsconfig.json
+
+.idea
+node_modules
+dist

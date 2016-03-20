@@ -1,0 +1,64 @@
+{
+  "context": "",
+  "theme": [
+    {
+      "name": "Unicorn",
+      "assets": {
+        "scripts": "",
+        "styles": ""
+      }
+    },
+    {
+      "name": "Rainbow",
+      "assets": {
+        "scripts": "",
+        "styles": ""
+      }
+    }
+  ],
+  "directory": [
+    {
+      "id": 456786,
+      "index": 1,
+      "name": "Generic",
+      "directory": []
+    },
+    {
+      "id": 093746,
+      "index": 2,
+      "name": "Base",
+      "directory": []
+    },
+    {
+      "id": 124930,
+      "index": 3,
+      "name": "Objects",
+      "directory": []
+    },
+    {
+      "id": 392847,
+      "index": 4,
+      "name": "Components",
+      "directory": [
+        {
+          "id": 467865,
+          "index": 1,
+          "name": "Dropdown",
+          "files": {
+            "md": "## Dropdown\nDropdown example",
+            "html": "<h1>Dropdown</h1>"
+          }
+        }
+      ],
+      "files": {
+        "md": "## Components\nSome example components"
+      }
+    },
+    {
+      "id": 134584,
+      "index": 5,
+      "name": "Trumps",
+      "directory": []
+    }
+  ]
+}
