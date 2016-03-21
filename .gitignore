@@ -1,6 +1,7 @@
 .DS_Store
 jsconfig.json
 pablo.json
+npm-debug.log
 
 .idea
 node_modules
