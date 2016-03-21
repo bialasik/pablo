@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default () => {
+export default (props) => {
   return (
     <nav>
-      <h1>Nav</h1>
+      { props.data.directory.map((file) => <h1>{ file.name }</h1>) }
     </nav>
   );
 };
