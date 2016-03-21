@@ -1,6 +1,6 @@
 module.exports = {
   entry: [
-    './src/assets/js/index.jsx'
+    './src/assets/scripts/index.js'
   ],
   module: {
     loaders: [{
@@ -13,11 +13,11 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   output: {
-    path: __dirname + '/dist/assets/js',
+    path: __dirname + '/dist/public/scripts',
     publicPath: '/',
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist/assets/js'
+    contentBase: './dist/public/scripts'
   }
 };

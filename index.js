@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
 
-app.use('/assets', express.static(`${__dirname}/dist/assets`));
+app.use('/public', express.static(`${__dirname}/dist/public`));
 
 app.disable('x-powered-by');
 
