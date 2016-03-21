@@ -5,10 +5,12 @@ import Navigation from './../components/navigation';
 export default class App extends Component {
   render() {
     return (
-      <main>
+      <div>
         <Navigation />
-        { this.props.children }
-      </main>
+        <main>
+          { this.props.children }
+        </main>
+      </div>
     );
   }
 };
