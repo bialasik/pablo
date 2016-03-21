@@ -29,14 +29,14 @@ const buildFileObject = (context, file) => {
   };
 }
 
-const flatten = (previous, current) => {
+const merge = (previous, current) => {
   return Object.assign({}, previous, current);
 };
 
 const build = (context, files) => {
   return {
     directory: files.filter((file) => isDirectory(`${context}/${file}`)).map((file) => buildDirectoryObject(context, file)),
-    files: files.filter((file) => !isDirectory(`${context}/${file}`)).map((file) => buildFileObject(context, file)).reduce(flatten, {})
+    files: files.filter((file) => !isDirectory(`${context}/${file}`)).map((file) => buildFileObject(context, file)).reduce(merge, {})
   };
 };
 
@@ -48,6 +48,6 @@ program
       if (err) throw err;
       app.start();
     });
-  })
+  });
 
 program.parse(process.argv);
