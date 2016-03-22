@@ -43,7 +43,11 @@ program
   .version(package.version)
   .command('start')
   .action(() => {
-    fs.writeFile(`${__dirname}/../${OUTPUT_FILENAME}`, JSON.stringify(build(root, fs.readdirSync(root))), (err) => {
+    const pablo = Object.assign({
+      absolute: path.resolve(path.dirname())
+    }, config, build(root, fs.readdirSync(root)));
+
+    fs.writeFile(`${__dirname}/../${OUTPUT_FILENAME}`, JSON.stringify(pablo), (err) => {
       if (err) throw err;
       require('./../index')();
     });
