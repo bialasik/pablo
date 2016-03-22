@@ -1,36 +1,31 @@
 import React, { Component } from 'react';
 
+import Footer from './../components/Footer';
 import Navbar from './../components/Navbar';
 import Navigation from './../components/Navigation';
 
+const __INITIAL_STATE__ = window.__INITIAL_STATE__;
+const THEME_URL_BASE = '/theme';
+
 export default class App extends Component {
-  setStylesheetHref(url) {
-    document.getElementById('theme').setAttribute('href', `/theme/${url}`);
-    return this;
-  }
-
-  setJavascriptHref(url) {
-    return this;
-  }
-
-  setTheme(assets) {
-    this.setStylesheetHref(assets.styles);
-    this.setJavascriptHref(assets.scripts);
+  setResources({ styles, scripts}) {
+    document.getElementById('theme').setAttribute('href', `${THEME_URL_BASE}/${styles}`);
     return this;
   }
 
   componentWillMount() {
-    this.setTheme(window.routes.theme[0].assets);
+    this.setResources(__INITIAL_STATE__.theme[0].assets);
   }
 
   render() {
     return (
       <div>
-        <Navbar themes={ window.routes.theme } handler={ this.setTheme.bind(this) } />
-        <Navigation data={ window.routes } />
+        <Navbar themes={ __INITIAL_STATE__.theme } handler={ this.setResources.bind(this) } />
+        <Navigation data={ __INITIAL_STATE__ } />
         <main>
           { this.props.children }
         </main>
+        <Footer />
       </div>
     );
   }
