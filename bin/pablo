@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const app = require('./../index');
 const fs = require('fs');
 const package = require('./../package.json');
 const path = require('path');
@@ -27,7 +26,7 @@ const buildFileObject = (context, file) => {
   return {
     [file]: fs.readFileSync(`${context}/${file}`, 'utf-8')
   };
-}
+};
 
 const merge = (previous, current) => {
   return Object.assign({}, previous, current);
@@ -46,7 +45,7 @@ program
   .action(() => {
     fs.writeFile(`${__dirname}/../${OUTPUT_FILENAME}`, JSON.stringify(build(root, fs.readdirSync(root))), (err) => {
       if (err) throw err;
-      app.start();
+      require('./../index')();
     });
   });
 

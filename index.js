@@ -20,8 +20,4 @@ app.disable('x-powered-by');
 app.get('/health-check', (req, res) => res.sendStatus(200));
 app.get('*', (req, res) => res.sendFile(`${__dirname}/index.html`));
 
-module.exports = {
-  start: () => {
-    app.listen(process.env.PORT || 3000);
-  }
-};
+module.exports = () => app.listen(process.env.PORT || 3000);
