@@ -9,7 +9,8 @@ const THEME_URL_BASE = '/theme';
 
 export default class App extends Component {
   setResources({ styles, scripts}) {
-    document.getElementById('theme').setAttribute('href', `${THEME_URL_BASE}/${styles}`);
+    document.getElementById('theme-styles').setAttribute('href', `${THEME_URL_BASE}/${styles}`);
+    document.getElementById('theme-script').setAttribute('src', `${THEME_URL_BASE}/${scripts}`);
     return this;
   }
 
