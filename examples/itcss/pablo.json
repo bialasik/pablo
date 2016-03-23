@@ -1,0 +1,13 @@
+{
+  "title": "ITCSS",
+  "context": "./content",
+  "theme": [
+    {
+      "name": "Unicorn",
+      "assets": {
+        "scripts": "scripts/unicorn.js",
+        "styles": "styles/unicorn.css"
+      }
+    }
+  ]
+}
