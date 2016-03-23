@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import ReactMarkdown from 'react-markdown';
+
+const __INITIAL_STATE__ = window.__INITIAL_STATE__;
 
 export default class Detail extends Component {
   getSection(params, data) {
@@ -10,13 +13,15 @@ export default class Detail extends Component {
   }
 
   componentWillMount() {
-    this.section = this.getSection(this.props.routeParams.splat, window.routes);
+    this.section = this.getSection(this.props.routeParams.splat, __INITIAL_STATE__);
   }
 
   render() {
-    console.log(this);
+    const example = '## Dropdown\n\nDropdown example';
+
     return (
       <div>
+        <ReactMarkdown source={ example } />
         { this.props.children }
       </div>
     );
