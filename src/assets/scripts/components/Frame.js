@@ -25,6 +25,6 @@ export default class Frame extends Component {
     }
 
     render() {
-        return <iframe />;
+        return <iframe />
     }
 }
