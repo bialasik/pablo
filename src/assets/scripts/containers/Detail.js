@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ReactMarkdown from 'react-markdown';
+import Highlight from 'react-highlight';
+import Markdown from 'react-markdown';
 
 const __INITIAL_STATE__ = window.__INITIAL_STATE__;
 
@@ -21,7 +22,8 @@ export default class Detail extends Component {
 
     return (
       <div>
-        <ReactMarkdown source={ example } />
+        <Highlight></Highlight>
+        <Markdown source={ example } />
         { this.props.children }
       </div>
     );
