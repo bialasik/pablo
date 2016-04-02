@@ -3,6 +3,7 @@ jsconfig.json
 pablo.json
 !*/**/pablo.json
 npm-debug.log
+**/*.orig*
 
 .idea
 node_modules

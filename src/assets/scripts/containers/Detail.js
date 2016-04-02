@@ -1,31 +1,30 @@
 import React, { Component } from 'react';
+import ReactMarkdown from 'react-markdown';
 import Highlight from 'react-highlight';
-import Markdown from 'react-markdown';
+
+import Frame from './../components/Frame';
 
 const __INITIAL_STATE__ = window.__INITIAL_STATE__;
 
 export default class Detail extends Component {
   getSection(params, data) {
-    return params.split('/').map((param) => {
-      return data.directory.filter((current) => {
-        return current.name.toLowerCase() === param;
-      });
-    });
-  }
+    return params.split('/').reduce((prev, curr) => {
+      const currentDirectory = prev.directory.filter((directory) => {
+        return directory.name.toLowerCase() === curr.toLowerCase();
+      }).pop();
 
   componentWillMount() {
     this.section = this.getSection(this.props.routeParams.splat, __INITIAL_STATE__);
   }
 
   render() {
-    const example = '## Dropdown\n\nDropdown example';
+    this.section = this.getSection(this.props.routeParams.splat, __INITIAL_STATE__);
 
     return (
-      <div>
+      <Frame>
         <Highlight></Highlight>
-        <Markdown source={ example } />
-        { this.props.children }
-      </div>
+        {this.section.files['01.default.html'] ? <ReactMarkdown source={ this.section.files['01.default.html'] } /> : <h1>Nothing to see mate.</h1>}
+      </Frame>
     );
   }
 };
