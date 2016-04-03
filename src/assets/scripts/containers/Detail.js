@@ -13,8 +13,21 @@ export default class Detail extends Component {
         return directory.name.toLowerCase() === curr.toLowerCase();
       }).pop();
 
-  componentWillMount() {
-    this.section = this.getSection(this.props.routeParams.splat, __INITIAL_STATE__);
+      return Object.assign({}, currentDirectory);
+    }, data);
+  }
+
+  getContent() {
+    if (this.section.files['01.default.md'] && this.section.files['01.default.html']) {
+      return (
+        <section>
+          <ReactMarkdown source={ this.section.files['01.default.md'] } />
+          <Highlight>{ this.section.files['01.default.html'] }</Highlight>
+        </section>
+      );
+    } else {
+      return <h1>Nothing to see mate.</h1>;
+    }
   }
 
   render() {
@@ -22,8 +35,7 @@ export default class Detail extends Component {
 
     return (
       <Frame>
-        <Highlight></Highlight>
-        {this.section.files['01.default.html'] ? <ReactMarkdown source={ this.section.files['01.default.html'] } /> : <h1>Nothing to see mate.</h1>}
+        { this.getContent() }
       </Frame>
     );
   }
