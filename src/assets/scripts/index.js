@@ -1,3 +1,5 @@
+import '!style!css!sass!./../styles/pablo.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';

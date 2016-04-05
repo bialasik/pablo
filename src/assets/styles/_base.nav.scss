@@ -1,0 +1,21 @@
+nav {
+  a {
+    color: #333;
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 12px 32px;
+    text-transform: uppercase;
+  }
+
+  div div {
+    margin: 0 0 0 20px;
+
+    a {
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+  }
+}

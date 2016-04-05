@@ -3,7 +3,7 @@ import React from 'react';
 export default () => {
   return (
     <footer>
-      <p>Made by Pablo</p>
+      <h6>Powered by pablo</h6>
     </footer>
   );
 };

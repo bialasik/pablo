@@ -22,6 +22,9 @@ export default class Detail extends Component {
       return (
         <section>
           <ReactMarkdown source={ this.section.files['01.default.md'] } />
+          <Frame>
+            <ReactMarkdown source={ this.section.files['01.default.md'] } />
+          </Frame>
           <Highlight>{ this.section.files['01.default.html'] }</Highlight>
         </section>
       );
@@ -34,9 +37,9 @@ export default class Detail extends Component {
     this.section = this.getSection(this.props.routeParams.splat, __INITIAL_STATE__);
 
     return (
-      <Frame>
+      <section>
         { this.getContent() }
-      </Frame>
+      </section>
     );
   }
 };

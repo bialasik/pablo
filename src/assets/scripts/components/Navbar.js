@@ -17,7 +17,6 @@ export default (props) => {
     <header>
       <h1>Pablo</h1>
       { toggle }
-      <hr />
     </header>
   );
 };

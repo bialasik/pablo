@@ -1,1 +1,11 @@
-@import "generic/reset";
+@import "~normalize.css/normalize.css";
+@import "~highlight.js/styles/obsidian.css";
+
+@import "settings.typography";
+
+@import "base.document";
+@import "base.links";
+@import "base.typography";
+@import "base.nav";
+
+@import "component.sidebar";

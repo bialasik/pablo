@@ -9,8 +9,8 @@ const THEME_URL_BASE = '/theme';
 
 export default class App extends Component {
   setResources({ styles, scripts}) {
-    if (styles) document.getElementById('theme-styles').setAttribute('href', `${THEME_URL_BASE}/${styles}`);
-    if (scripts) document.getElementById('theme-script').setAttribute('src', `${THEME_URL_BASE}/${scripts}`);
+    // if (styles) document.getElementById('theme-styles').setAttribute('href', `${THEME_URL_BASE}/${styles}`);
+    // if (scripts) document.getElementById('theme-script').setAttribute('src', `${THEME_URL_BASE}/${scripts}`);
     return this;
   }
 
@@ -21,12 +21,14 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Navbar themes={ __INITIAL_STATE__.theme } handler={ this.setResources.bind(this) } />
-        <Navigation data={ __INITIAL_STATE__ } />
+        <section className="sidebar">
+          <Navbar themes={ __INITIAL_STATE__.theme } handler={ this.setResources.bind(this) } />
+          <Navigation data={ __INITIAL_STATE__ } />
+        </section>
         <main>
           { this.props.children }
+          <Footer />
         </main>
-        <Footer />
       </div>
     );
   }

@@ -1,0 +1,30 @@
+html,
+body {
+  height: 100%;
+}
+
+html {
+  font-family: $typography-font-family-base;
+  position: relative;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  margin: 0 0 0 240px;
+  padding: 20px;
+}
+
+iframe {
+  border: none;
+  margin: 12px;
+  width: 99%;
+}
+
+footer {
+  border-top: 1px solid #f4f6f9;
+  margin: 0 -20px;
+  padding: 20px;
+}
