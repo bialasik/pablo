@@ -5,9 +5,9 @@ export default (props) => {
 
   if (props.themes.length > 1) {
     toggle = (
-      <nav>
+      <nav className="button-list">
         { props.themes.map((theme) => {
-          return (<button onClick={ (event) => props.handler(theme.assets) }>{ theme.name }</button>);
+          return (<button className="button-list__item" onClick={ (event) => props.handler(theme.assets) }>{ theme.name }</button>);
         }) }
       </nav>
     );
@@ -15,7 +15,6 @@ export default (props) => {
 
   return (
     <header>
-      <h1>Pablo</h1>
       { toggle }
     </header>
   );
