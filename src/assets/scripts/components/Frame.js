@@ -10,6 +10,7 @@ export default class Frame extends Component {
         const doc = ReactDOM.findDOMNode(this).contentDocument;
 
         if(doc.readyState === 'complete') {
+            ReactDOM.render(<link rel="stylesheet" href="http://localhost:3000/theme/unicorn/unicorn.css" />, doc.head);
             ReactDOM.render(this.props.children, doc.body);
         } else {
             setTimeout(this.renderFrameContents, 0);
