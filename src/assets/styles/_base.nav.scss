@@ -7,14 +7,17 @@ nav {
     letter-spacing: 2px;
     padding: 12px 32px;
     text-transform: uppercase;
+
+    &:hover {
+      background-color: rgba(244,246,249,.5);
+    }
   }
 
   div div {
-    margin: 0 0 0 20px;
-
     a {
       font-weight: 400;
       letter-spacing: 0;
+      padding: 12px 52px;
       text-transform: none;
     }
   }
