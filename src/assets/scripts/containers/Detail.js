@@ -23,7 +23,7 @@ export default class Detail extends Component {
         <section>
           <ReactMarkdown source={ this.section.files['01.default.md'] } />
           <Frame>
-            <ReactMarkdown source={ this.section.files['01.default.md'] } />
+            <div dangerouslySetInnerHTML={ { __html: this.section.files['01.default.html'] } }></div>
           </Frame>
           <Highlight>{ this.section.files['01.default.html'] }</Highlight>
         </section>
