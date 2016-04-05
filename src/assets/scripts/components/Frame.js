@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom';
 export default class Frame extends Component {
     componentDidMount() {
         this.renderFrameContents();
+        Array.from(document.querySelectorAll('iframe')).map((frame) => {
+          frame.style.height = `${frame.contentWindow.document.body.scrollHeight}px`;
+        });
     }
 
     renderFrameContents() {
@@ -25,6 +28,6 @@ export default class Frame extends Component {
     }
 
     render() {
-        return <iframe />;
+        return <iframe scrolling="no" />;
     }
 }
