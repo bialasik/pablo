@@ -35,7 +35,7 @@ export default class Detail extends Component {
 
   render() {
     this.section = this.getSection(this.props.routeParams.splat, __INITIAL_STATE__);
-
+    
     return (
       <section>
         { this.getContent() }
