@@ -9,33 +9,49 @@ const __INITIAL_STATE__ = window.__INITIAL_STATE__;
 export default class Detail extends Component {
   getSection(params, data) {
     return params.split('/').reduce((prev, curr) => {
-      const currentDirectory = prev.directory.filter((directory) => {
-        return directory.name.toLowerCase() === curr.toLowerCase();
+      const currDir = prev.children.filter((dir) => {
+          return dir.title.toLowerCase() === curr.toLowerCase();
       }).pop();
-
-      return Object.assign({}, currentDirectory);
+      return Object.assign({}, currDir);
     }, data);
   }
 
   getContent() {
-    if (this.section.files['01.default.md'] && this.section.files['01.default.html']) {
-      return (
-        <section>
-          <ReactMarkdown source={ this.section.files['01.default.md'] } />
-          <Frame>
-            <div dangerouslySetInnerHTML={ { __html: this.section.files['01.default.html'] } }></div>
-          </Frame>
-          <Highlight>{ this.section.files['01.default.html'] }</Highlight>
-        </section>
-      );
-    } else {
-      return <h1>Nothing to see mate.</h1>;
-    }
+    return this.section.content.map((files) => {
+      return files.map((file) => {
+        if (file.type === 'md') {
+          return (
+            <section>
+              <ReactMarkdown source={ file.body } />
+            </section>
+          );
+        }
+
+        if (file.type === 'css') {
+          return (
+            <section>
+              <Highlight>{ file.body }</Highlight>
+            </section>
+          );
+        }
+
+        if (file.type === 'html') {
+          return (
+            <section>
+              <Frame>
+                <div dangerouslySetInnerHTML={ { __html: file.body } }></div>
+              </Frame>
+              <Highlight>{ file.body }</Highlight>
+            </section>
+          );
+        }
+      });
+    })
   }
 
   render() {
-    this.section = this.getSection(this.props.routeParams.splat, __INITIAL_STATE__);
-    
+    this.section = this.getSection(this.props.routeParams.splat, { children: __INITIAL_STATE__.content });
+
     return (
       <section>
         { this.getContent() }

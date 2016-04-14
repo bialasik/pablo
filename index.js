@@ -24,7 +24,7 @@ app.disable('x-powered-by');
 
 app.get('/health-check', (req, res) => res.sendStatus(200));
 app.get('*', (req, res) => {
-  const context = { theme: pablo.theme, directory: pablo.directory };
+  const context = { theme: pablo.theme, content: pablo.content };
   res.render('index', { title: pablo.title, state: JSON.stringify(context) });
 });
 

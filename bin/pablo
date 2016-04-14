@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const package = require('./../package.json');
 const path = require('path');
 const program = require('commander');
-const uuid = require('node-uuid');
+
+const pkg = require('./../package.json');
 
 const INPUT_FILENAME = 'pablo.json';
 const OUTPUT_FILENAME = 'pablo.json';
@@ -12,40 +12,39 @@ const OUTPUT_FILENAME = 'pablo.json';
 const config = JSON.parse(fs.readFileSync(`${path.dirname()}/${INPUT_FILENAME}`, 'utf-8'));
 const root = config.context;
 
-const isDirectory = (file) => fs.lstatSync(file).isDirectory();
+const build = (context) => {
+  const currentDir = fs.readdirSync(context);
+  const title = context.split('/').pop();
 
-const buildDirectoryObject = (context, file) => {
-  return Object.assign({
-    id: uuid.v4(),
-    index: parseInt(file.split('.')[0], 10),
-    name: file.split('.')[1]
-  }, build(`${context}/${file}`, fs.readdirSync(`${context}/${file}`)));
-};
-
-const buildFileObject = (context, file) => {
   return {
-    [file]: fs.readFileSync(`${context}/${file}`, 'utf-8')
+    title,
+    content: currentDir.filter((dir) => dir === 'content').map((dir) => {
+      const nestedDir = fs.readdirSync(`${context}/${dir}`);
+      return nestedDir.map((filename) => {
+        return {
+          type: filename.split('.').pop(),
+          body: fs.readFileSync(`${context}/${dir}/${filename}`, 'utf-8')
+        }
+      });
+    }),
+    children: currentDir.filter((dir) => dir === 'children').map((dir) => {
+      const nestedDir = fs.readdirSync(`${context}/${dir}`);
+      return build(`${context}/${dir}/${nestedDir}`);
+    })
   };
 };
 
-const merge = (previous, current) => {
-  return Object.assign({}, previous, current);
-};
-
-const build = (context, files) => {
-  return {
-    directory: files.filter((file) => isDirectory(`${context}/${file}`)).map((file) => buildDirectoryObject(context, file)),
-    files: files.filter((file) => !isDirectory(`${context}/${file}`)).map((file) => buildFileObject(context, file)).reduce(merge, {})
-  };
+const generate = (context, dirs) => {
+  return { content: dirs.map((dirname) => build(`${context}/${dirname}`)) };
 };
 
 program
-  .version(package.version)
+  .version(pkg.version)
   .command('start')
   .action(() => {
     const pablo = Object.assign({
       absolute: path.resolve(path.dirname())
-    }, config, build(root, fs.readdirSync(root)));
+    }, config, generate(root, fs.readdirSync(root)));
 
     fs.writeFile(`${__dirname}/../${OUTPUT_FILENAME}`, JSON.stringify(pablo), (err) => {
       if (err) throw err;
