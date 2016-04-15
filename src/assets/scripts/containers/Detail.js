@@ -38,7 +38,7 @@ export default class Detail extends Component {
         if (file.type === 'html') {
           return (
             <section>
-              <Frame>
+              <Frame styles={ this.props.theme.styles }>
                 <div dangerouslySetInnerHTML={ { __html: file.body } }></div>
               </Frame>
               <Highlight>{ file.body }</Highlight>

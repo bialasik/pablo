@@ -9,8 +9,9 @@ const THEME_URL_BASE = '/theme';
 
 export default class App extends Component {
   setResources({ styles, scripts}) {
-    // if (styles) document.getElementById('theme-styles').setAttribute('href', `${THEME_URL_BASE}/${styles}`);
-    // if (scripts) document.getElementById('theme-script').setAttribute('src', `${THEME_URL_BASE}/${scripts}`);
+    this.setState({
+      styles: `${THEME_URL_BASE}/${styles}`
+    });
     return this;
   }
 
@@ -26,7 +27,11 @@ export default class App extends Component {
           <Navigation data={ __INITIAL_STATE__ } />
         </section>
         <main>
-          { this.props.children }
+          { this.props.children && React.cloneElement(this.props.children, {
+            theme: {
+              styles: this.state.styles
+            }
+          }) }
           <Footer />
         </main>
       </div>
