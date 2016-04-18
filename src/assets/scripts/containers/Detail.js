@@ -17,35 +17,33 @@ export default class Detail extends Component {
   }
 
   getContent() {
-    return this.section.content.map((files) => {
-      return files.map((file) => {
-        if (file.type === 'md') {
-          return (
-            <section>
-              <ReactMarkdown source={ file.body } />
-            </section>
-          );
-        }
+    return this.section.content.map((file) => {
+      if (file.type === 'md') {
+        return (
+          <section>
+            <ReactMarkdown source={ file.body } />
+          </section>
+        );
+      }
 
-        if (file.type === 'css') {
-          return (
-            <section>
-              <Highlight>{ file.body }</Highlight>
-            </section>
-          );
-        }
+      if (file.type === 'css') {
+        return (
+          <section>
+            <Highlight>{ file.body }</Highlight>
+          </section>
+        );
+      }
 
-        if (file.type === 'html') {
-          return (
-            <section>
-              <Frame styles={ this.props.theme.styles }>
-                <div dangerouslySetInnerHTML={ { __html: file.body } }></div>
-              </Frame>
-              <Highlight>{ file.body }</Highlight>
-            </section>
-          );
-        }
-      });
+      if (file.type === 'html') {
+        return (
+          <section>
+            <Frame styles={ this.props.theme.styles }>
+              <div dangerouslySetInnerHTML={ { __html: file.body } }></div>
+            </Frame>
+            <Highlight>{ file.body }</Highlight>
+          </section>
+        );
+      }
     })
   }
 

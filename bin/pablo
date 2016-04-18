@@ -16,22 +16,24 @@ const build = (context) => {
   const currentDir = fs.readdirSync(context);
   const title = context.split('/').pop();
 
-  return {
-    title,
-    content: currentDir.filter((dir) => dir === 'content').map((dir) => {
-      const nestedDir = fs.readdirSync(`${context}/${dir}`);
-      return nestedDir.map((filename) => {
-        return {
-          type: filename.split('.').pop(),
-          body: fs.readFileSync(`${context}/${dir}/${filename}`, 'utf-8')
-        }
-      });
-    }),
-    children: currentDir.filter((dir) => dir === 'children').map((dir) => {
-      const nestedDir = fs.readdirSync(`${context}/${dir}`);
-      return build(`${context}/${dir}/${nestedDir}`);
-    })
-  };
+    return {
+        title,
+        content: currentDir.filter((dir) => dir === 'content').reduce((acc, dir) => {
+            const nestedDir = fs.readdirSync(`${context}/${dir}`);
+            return nestedDir.map((filename) => {
+                return {
+                    type: filename.split('.').pop(),
+                    body: fs.readFileSync(`${context}/${dir}/${filename}`, 'utf-8')
+                }
+            });
+        }, []),
+        children: currentDir.filter((dir) => dir === 'children').reduce((acc, dir) => {
+            const nestedDir = fs.readdirSync(`${context}/${dir}`);
+            return nestedDir.map((filename) => {
+                return build(`${context}/${dir}/${filename}`);
+            });
+        }, [])
+    }
 };
 
 const generate = (context, dirs) => {

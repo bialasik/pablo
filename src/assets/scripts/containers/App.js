@@ -10,7 +10,7 @@ const THEME_URL_BASE = '/theme';
 export default class App extends Component {
   setResources({ styles, scripts}) {
     this.setState({
-      styles: `${THEME_URL_BASE}/${styles}`
+      styles: styles.map(styleHref => `${THEME_URL_BASE}/${styleHref}`)
     });
     return this;
   }

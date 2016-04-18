@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 export default class Frame extends Component {
+    buildLinkElements(stylesheetHrefs) {
+        return stylesheetHrefs.map((styleHref) => {
+            return <link href={styleHref} rel="stylesheet" />
+        });
+    }
+
     componentDidMount() {
         this.renderFrameContents();
         Array.from(document.querySelectorAll('iframe')).map((frame) => {
@@ -11,10 +17,9 @@ export default class Frame extends Component {
 
     renderFrameContents() {
         const doc = ReactDOM.findDOMNode(this).contentDocument;
-        const stylesHref = `${document.location.origin}${this.props.styles}`;
 
         if(doc.readyState === 'complete') {
-            ReactDOM.render(<link rel="stylesheet" href={ stylesHref } />, doc.head);
+            ReactDOM.render(<div>{this.buildLinkElements(this.props.styles)}</div>, doc.head);
             ReactDOM.render(this.props.children, doc.body);
         } else {
             setTimeout(this.renderFrameContents, 0);
@@ -30,8 +35,6 @@ export default class Frame extends Component {
     }
 
     render() {
-        console.log(this.props)
-
         return <iframe scrolling="no" />;
     }
 }

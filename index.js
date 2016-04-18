@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(compression());
 
 app.use('/public', express.static(`${__dirname}/dist/public`));
-app.use('/theme', express.static(`${pablo.absolute}/theme`));
+app.use('/theme', express.static(`${pablo.absolute}/`));
 
 app.engine('html', require('hbs').__express);
 
