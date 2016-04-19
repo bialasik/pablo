@@ -1,6 +1,6 @@
 {
   "name": "pablo",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "",
   "license": "MIT",
   "repository": "https://github.com/curlybracesco/pablo",
@@ -12,9 +12,7 @@
   "engines": {
     "node": ">=4.0.0"
   },
-  "bin": {
-    "pablo": "./bin/pablo"
-  },
+  "bin": "./bin/pablo",
   "scripts": {
     "build": "npm run webpack",
     "postinstall": "npm run build",
