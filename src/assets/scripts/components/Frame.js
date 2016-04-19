@@ -8,20 +8,23 @@ export default class Frame extends Component {
         });
     }
 
+    setFrameStyles(frame) {
+        frame.contentDocument.body.style.margin = '10px';
+        frame.style.height = `${frame.contentDocument.body.scrollHeight}px`;
+    }
+
     componentDidMount() {
         this.renderFrameContents();
-        Array.from(document.querySelectorAll('iframe')).map((frame) => {
-          frame.style.height = `${frame.contentWindow.document.body.scrollHeight}px`;
-        });
     }
 
     renderFrameContents() {
-        const doc = ReactDOM.findDOMNode(this).contentDocument;
+        const el = ReactDOM.findDOMNode(this);
+        const doc = el.contentDocument;
 
         if(doc.readyState === 'complete') {
-            doc.body.style.margin = '10px';
             ReactDOM.render(<div>{this.buildLinkElements(this.props.styles)}</div>, doc.head);
             ReactDOM.render(this.props.children, doc.body);
+            this.setFrameStyles(el);
         } else {
             setTimeout(this.renderFrameContents, 0);
         }
