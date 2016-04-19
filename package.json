@@ -1,6 +1,6 @@
 {
   "name": "pablo",
-  "version": "0.0.5",
+  "version": "0.0.9",
   "description": "",
   "license": "MIT",
   "repository": "https://github.com/curlybracesco/pablo",
@@ -12,7 +12,9 @@
   "engines": {
     "node": ">=4.0.0"
   },
-  "bin": "./bin/pablo",
+  "bin": {
+    "pablo": "./bin/pablo"
+  },
   "scripts": {
     "build": "npm run webpack",
     "postinstall": "npm run build",
@@ -22,9 +24,6 @@
     "webpack": "webpack",
     "webpack:watch": "webpack --watch"
   },
-  "files": [
-    "index.js"
-  ],
   "keywords": [
     ""
   ],
