@@ -1,6 +1,6 @@
 {
   "name": "pablo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "license": "MIT",
   "repository": "https://github.com/curlybracesco/pablo",
@@ -16,10 +16,13 @@
     "pablo": "./bin/pablo"
   },
   "scripts": {
+    "build": "npm run webpack",
+    "postinstall": "npm run build",
     "start": "node index",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js \"test/**/*@(.js|.jsx)\"",
     "test:watch": "npm run test -- --watch",
-    "webpack": "webpack --watch"
+    "webpack": "webpack",
+    "webpack:watch": "webpack --watch"
   },
   "files": [
     "index.js"
