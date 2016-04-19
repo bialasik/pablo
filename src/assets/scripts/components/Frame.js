@@ -19,6 +19,7 @@ export default class Frame extends Component {
         const doc = ReactDOM.findDOMNode(this).contentDocument;
 
         if(doc.readyState === 'complete') {
+            doc.body.style.margin = '10px';
             ReactDOM.render(<div>{this.buildLinkElements(this.props.styles)}</div>, doc.head);
             ReactDOM.render(this.props.children, doc.body);
         } else {
