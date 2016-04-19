@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const program = require('commander');
+const junk = require('junk');
 
 const pkg = require('./../package.json');
 
@@ -13,13 +14,13 @@ const config = JSON.parse(fs.readFileSync(`${path.dirname()}/${INPUT_FILENAME}`,
 const root = config.context;
 
 const build = (context) => {
-  const currentDir = fs.readdirSync(context);
+  const currentDir = fs.readdirSync(context).filter(junk.not);
   const title = context.split('/').pop();
 
     return {
         title,
         content: currentDir.filter((dir) => dir === 'content').reduce((acc, dir) => {
-            const nestedDir = fs.readdirSync(`${context}/${dir}`);
+            const nestedDir = fs.readdirSync(`${context}/${dir}`).filter(junk.not);
             return nestedDir.map((filename) => {
                 return {
                     type: filename.split('.').pop(),
@@ -28,7 +29,7 @@ const build = (context) => {
             });
         }, []),
         children: currentDir.filter((dir) => dir === 'children').reduce((acc, dir) => {
-            const nestedDir = fs.readdirSync(`${context}/${dir}`);
+            const nestedDir = fs.readdirSync(`${context}/${dir}`).filter(junk.not);
             return nestedDir.map((filename) => {
                 return build(`${context}/${dir}/${filename}`);
             });
