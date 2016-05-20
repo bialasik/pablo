@@ -38,7 +38,7 @@ const build = (context) => {
 };
 
 const generate = (context, dirs) => {
-  return { content: dirs.map((dirname) => build(`${context}/${dirname}`)) };
+  return { content: dirs.filter(junk.not).map((dirname) => build(`${context}/${dirname}`)) };
 };
 
 program
